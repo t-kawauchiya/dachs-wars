@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!prototype"]
+    "includes": ["**", "!prototype", "!.claude/skills"]
   },
   "formatter": {
     "enabled": true,

@@ -1,4 +1,4 @@
-name: 作業
+name: 作業の Issue
 description: 1つのプルリクで閉じる作業。決め事は docs/workflow.md にある
 title: "種類(scope): "
 body:

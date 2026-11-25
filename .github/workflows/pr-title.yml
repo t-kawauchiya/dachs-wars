@@ -1,0 +1,24 @@
+name: PR title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  title:
+    runs-on: ubuntu-latest
+    steps:
+      # 種類と scope の一覧は docs/workflow.md の「タイトル」の節と同じにする
+      - env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          pattern='^(feat|fix|refactor|test|docs|chore)\((core|client|infra|docs)\): .+'
+          # 説明の最初の文字が空白（半角、全角、タブ）なら、説明がないとみなす
+          description="${TITLE#*): }"
+          if [[ "$TITLE" =~ $pattern && "$description" != [[:space:]]* && "$description" != "　"* ]]; then
+            echo "OK: $TITLE"
+          else
+            echo "::error::プルリクのタイトルが「種類(scope): 説明」の形ではありません: $TITLE"
+            echo "種類と scope は docs/workflow.md の「タイトル」の節を見てください"
+            exit 1
+          fi

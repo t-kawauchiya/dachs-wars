@@ -31,10 +31,31 @@
 
 犬に危ない食べ物（チョコ、ブドウなど）は反則で投げられない。
 
-## 現状
+## 開発
 
-- `index.html`：対CPUのターン制プロトタイプ。ブラウザで開くだけで遊べる
-- 数値はすべて仮
+Node.js 22.12以上と pnpm が必要。
+
+```sh
+pnpm install      # 依存関係のインストール
+pnpm dev          # 開発サーバー（ゲーム画面）
+pnpm test         # テスト（Vitest）
+pnpm typecheck    # 型チェック
+pnpm check        # lint・フォーマットの確認（Biome）
+pnpm fix          # lint・フォーマットの自動修正
+pnpm build        # 公開用のビルド
+```
+
+## 構成
+
+```
+packages/
+  core/     ゲームのルール。Phaserにもブラウザにも依存しない純粋なTypeScript
+  client/   Phaser。状態を描き、イベントを演出し、入力をアクションに変換する
+prototype/  最初のプロトタイプ（単体のHTML、ブラウザで開くだけで遊べる）
+docs/       決定事項
+```
+
+設計と技術選定の理由は [docs/decisions.md](docs/decisions.md) を参照。
 
 ## やりたいこと
 

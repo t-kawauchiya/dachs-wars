@@ -1,0 +1,22 @@
+{
+  "name": "dachs-wars",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @dachs/client dev",
+    "build": "pnpm --filter @dachs/client build",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "check": "biome check .",
+    "fix": "biome check --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.8",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}

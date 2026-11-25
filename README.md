@@ -33,7 +33,7 @@
 
 ## 開発
 
-Node.js 22.12以上と pnpm が必要。
+Node.js 26（`.node-version` に記載）と pnpm が必要。
 
 ```sh
 pnpm install      # 依存関係のインストール

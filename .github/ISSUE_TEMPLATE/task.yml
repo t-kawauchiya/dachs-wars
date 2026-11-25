@@ -1,0 +1,25 @@
+name: 作業
+description: 1つのプルリクで閉じる作業。決め事は docs/workflow.md にある
+title: "種類(scope): "
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的
+      description: なぜこの作業をするのか
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 完了条件
+      description: "確かめられる形で書く（例: `pnpm test` で段差ダメージのテストが通る）"
+    validations:
+      required: true
+  - type: textarea
+    id: keep
+    attributes:
+      label: 変えてはいけないこと
+      description: この作業で触らないもの、変えない振る舞い
+    validations:
+      required: true

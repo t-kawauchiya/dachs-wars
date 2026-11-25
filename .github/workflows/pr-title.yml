@@ -13,7 +13,9 @@ jobs:
           TITLE: ${{ github.event.pull_request.title }}
         run: |
           pattern='^(feat|fix|refactor|test|docs|chore)\((core|client|infra|docs)\): .+'
-          if [[ "$TITLE" =~ $pattern ]]; then
+          # 説明の最初の文字が空白（半角、全角、タブ）なら、説明がないとみなす
+          description="${TITLE#*): }"
+          if [[ "$TITLE" =~ $pattern && "$description" != [[:space:]]* && "$description" != "　"* ]]; then
             echo "OK: $TITLE"
           else
             echo "::error::プルリクのタイトルが「種類(scope): 説明」の形ではありません: $TITLE"

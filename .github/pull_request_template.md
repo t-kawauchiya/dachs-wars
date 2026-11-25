@@ -7,7 +7,7 @@
 ## 振り返り
 
 - /architect で計画が変わったか:
-- /interrogate で本物の指摘があったか:
+- レビュー（/interrogate か /code-review）で本物の指摘があったか:
 - 手間の感覚（重かった、ちょうどよい、軽かった）:
 
 Closes #

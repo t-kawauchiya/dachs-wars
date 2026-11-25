@@ -22,9 +22,9 @@ name="$(node -p "require('./$ruleset_file').name")"
 id="$(gh api "repos/$repo/rulesets" --jq ".[] | select(.name == \"$name\") | .id")"
 if [[ -n "$id" ]]; then
   gh api --method PUT "repos/$repo/rulesets/$id" --input "$ruleset_file" --silent
-  echo "ルールセット「$name」を更新しました"
+  echo "ルールセット「${name}」を更新しました"
 else
   gh api --method POST "repos/$repo/rulesets" --input "$ruleset_file" --silent
-  echo "ルールセット「$name」を作りました"
+  echo "ルールセット「${name}」を作りました"
 fi
 echo "マージ設定を更新しました"

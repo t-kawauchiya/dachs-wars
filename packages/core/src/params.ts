@@ -22,10 +22,10 @@ export const FOODS = {
 export type FoodKind = keyof typeof FOODS;
 
 /** 足の本数の範囲 */
-export const LEGS = { min: 4, max: 10 };
+export const LEGS = { min: 4, max: 10 } as const;
 
 /** 砲台の数の範囲 */
-export const CANNONS = { min: 1, max: 3 };
+export const CANNONS = { min: 1, max: 3 } as const;
 
 /** 隣のマスとの高低差の上限（段） */
 export const MAX_STEP_DIFF = 2;

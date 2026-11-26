@@ -13,57 +13,82 @@ export type Cannons =
 
 export type Dog = {
   /** 腰の残り。0で負け */
-  back: number;
+  readonly back: number;
   /** 満腹。FULLNESS_MAX で負け */
-  fullness: number;
-  legs: number;
-  cannons: Cannons;
+  readonly fullness: number;
+  readonly legs: number;
+  readonly cannons: Cannons;
   /** いる列の番号（0から） */
-  column: number;
+  readonly column: number;
 };
 
 /** 地面に落ちた餌 */
-export type Food = { kind: FoodKind; column: number };
+export type Food = { readonly kind: FoodKind; readonly column: number };
 
 export type Outcome =
-  | { kind: "ongoing" }
-  | { kind: "win"; winner: PlayerId; reason: "back" | "full" | "timeout" }
-  | { kind: "draw" };
+  | { readonly kind: "ongoing" }
+  | {
+      readonly kind: "win";
+      readonly winner: PlayerId;
+      readonly reason: "back" | "full" | "timeout";
+    }
+  | { readonly kind: "draw" };
 
 export type GameState = {
   /** 列ごとの高さ（段） */
-  heights: readonly number[];
+  readonly heights: readonly number[];
   /** dogs[0] がプレイヤー0の犬 */
-  dogs: readonly [Dog, Dog];
-  foods: readonly Food[];
+  readonly dogs: readonly [Dog, Dog];
+  readonly foods: readonly Food[];
   /** 手番のプレイヤー */
-  turn: PlayerId;
-  turnCount: number;
+  readonly turn: PlayerId;
+  readonly turnCount: number;
   /** 乱数の状態（rng.ts の state） */
-  rng: number;
-  outcome: Outcome;
+  readonly rng: number;
+  readonly outcome: Outcome;
 };
 
-export type Point = { x: number; y: number };
+export type Point = { readonly x: number; readonly y: number };
 
 /**
  * 誰の行動かは state.turn で決まるので、アクションには入れない。
  * shoot の cannon は何門目か（0から）。aim はドラッグの向きと強さで、単位は弾道を作るときに決める。
  */
 export type Action =
-  | { type: "shoot"; cannon: number; aim: Point }
-  | { type: "placeStep"; column: number };
+  | { readonly type: "shoot"; readonly cannon: number; readonly aim: Point }
+  | { readonly type: "placeStep"; readonly column: number };
 
 /** 1つの手で起きたことを、起きた順に並べる。画面はこれを順に演出する */
 export type GameEvent =
   /** path は弾の軌道、landed は落ちた列 */
-  | { type: "shot"; player: PlayerId; food: FoodKind; path: readonly Point[]; landed: number }
+  | {
+      readonly type: "shot";
+      readonly player: PlayerId;
+      readonly food: FoodKind;
+      readonly path: readonly Point[];
+      readonly landed: number;
+    }
   /** height は置いたあとの高さ */
-  | { type: "stepPlaced"; column: number; height: number }
-  | { type: "moved"; player: PlayerId; from: number; to: number }
+  | { readonly type: "stepPlaced"; readonly column: number; readonly height: number }
+  | {
+      readonly type: "moved";
+      readonly player: PlayerId;
+      readonly from: number;
+      readonly to: number;
+    }
   /** fullness は食べたあとの満腹 */
-  | { type: "ate"; player: PlayerId; food: FoodKind; fullness: number }
+  | {
+      readonly type: "ate";
+      readonly player: PlayerId;
+      readonly food: FoodKind;
+      readonly fullness: number;
+    }
   /** back はダメージを受けたあとの腰の残り */
-  | { type: "backDamaged"; player: PlayerId; amount: number; back: number }
-  | { type: "slept"; player: PlayerId }
-  | { type: "ended"; outcome: Outcome };
+  | {
+      readonly type: "backDamaged";
+      readonly player: PlayerId;
+      readonly amount: number;
+      readonly back: number;
+    }
+  | { readonly type: "slept"; readonly player: PlayerId }
+  | { readonly type: "ended"; readonly outcome: Outcome };
